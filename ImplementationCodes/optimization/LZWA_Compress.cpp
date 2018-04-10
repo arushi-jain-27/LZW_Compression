@@ -1,6 +1,6 @@
 #include <bits/stdc++.h>
 #include<unordered_map>
-#define maxlen 1000
+#define maxlen 3
 #define max_16 65535
 using namespace std;
 
@@ -34,11 +34,12 @@ CodeType dictionary::find_d(string s)
 {
         if (a.find(s)!=a.end())
             return a[s];
-    return (CodeType)-1;
+    return (CodeType)(-1);
 }
 
 void dictionary:: insert_d(string s)
 {
+//	cout<<"inserting--->"<<size_d<<" "<<s<<endl;
 	if(size_d<max_16)
 	{
 	    a.insert(make_pair(s,size_d));
@@ -66,7 +67,7 @@ void compress()
             curr=sn+ch;
             
             
-        if (d.find_d(curr)!=(CodeType)-1)
+        if (d.find_d(curr)!=(CodeType)(-1))
         {
             if (xscnt > 1)
             {
@@ -81,6 +82,8 @@ void compress()
         {
         	CodeType temp = d.find_d(sn);
 //        	cout<<sn<<" "<<temp<<endl;
+//  			  cout<<"writing--->"<<temp<<" "<<sn<<endl;
+
             fout.write((const char*)&temp,sizeof(CodeType));
             
 			if (d.size_d!=max_16)
@@ -94,6 +97,7 @@ void compress()
     }
     
     CodeType temp = d.find_d(sn);
+//    cout<<"writing--->"<<temp<<" "<<sn<<endl;
     fout.write((const char*)&temp,sizeof(CodeType));
 //    cout<<sn<<" "<<temp<<endl;
     
